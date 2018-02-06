@@ -16,7 +16,7 @@ class Veritrans_Notification {
 
   public function __construct($input_source = "php://input")
   {
-    $raw_notification = json_decode(file_get_contents($input_source), true);
+    $raw_notification = json_decode(stripslashes(trim(file_get_contents($input_source), '"')), true);
     $status_response = Veritrans_Transaction::status($raw_notification['transaction_id']);
     $this->response = $status_response;
   }
